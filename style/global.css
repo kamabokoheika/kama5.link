@@ -1,0 +1,44 @@
+/*全部のサイト共通*/
+body {
+    margin: 0px auto;
+    border-width: 10px;
+    border-color: aqua;
+    width: 800px;
+    background-color: azure;
+    border: solid;
+    border-top: 0px;
+    border-bottom: 0px;
+}
+
+.sita {
+    height: 200px;
+    width: 800px;
+}
+
+h1 {
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    text-decoration-color: black;
+}
+
+.h2desu {
+    font-size: 20px;
+}
+
+.title{
+    border: steelblue;
+    border-style: dotted;
+    background-color: aquamarine;
+    width: 800px;
+    height: 200px;
+    background-image: url(../image/title.png);
+}
+
+
+
+/*404.html用*/
+.notfond {
+    background-color: black;
+    color: aliceblue;
+}
