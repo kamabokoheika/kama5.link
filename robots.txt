@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kama5.f5.si/sitemap.xml
