@@ -31,6 +31,7 @@ h1 {
 
 .title{
     border: steelblue;
+    border-width: thick;
     border-style: outset;
     background-color: aquamarine;
     width: 800px;
