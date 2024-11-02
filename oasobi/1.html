@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://kama5.f5.si/style/global.css" rel="stylesheet">
+    <link rel="icon" type="image/ico" href="https://kama5.f5.si/image/favicon.ico">
+    <title>しょぼーん</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
+    <style>
+        #myCanvas {
+            width: 400px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <!--ここから-->
+    <a href="https://kama5.f5.si/index.html">
+        <table class="title">
+        </table>
+    </a>
+    <hr>
+    <!--ここまでは何もしない-->
+    <h1>しょぼーん</h1>
+    <canvas id="myCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const kamabokoList = []; // かまぼこの情報を格納する配列
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function createKamaboko() {
+            const kamabokoText = '(´・ω・`)'; 
+            const textWidth = ctx.measureText(kamabokoText).width; 
+            
+            const kamabokoX = Math.random() * (canvas.width - textWidth);
+            const kamabokoY = Math.random() * (canvas.height - 50); 
+
+            kamabokoList.push({
+                x: kamabokoX,
+                y: kamabokoY,
+                dx: (Math.random() - 0.5) * 4,
+                dy: (Math.random() - 0.5) * 4,
+                angle: 0,
+                angleIncrement: (Math.random() - 0.5) * 0.1,
+                kamabokoText: kamabokoText,
+                color: getRandomColor() // ランダムな色を生成して追加
+            });
+        }
+
+        function drawKamaboko(kamaboko) {
+            ctx.save();
+            ctx.translate(kamaboko.x + ctx.measureText(kamaboko.kamabokoText).width / 2, kamaboko.y + 25); 
+            ctx.rotate(kamaboko.angle);
+            ctx.font = 'bold 12px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillStyle = kamaboko.color; // かまぼこオブジェクトの色を使用
+            ctx.fillText(kamaboko.kamabokoText, 0, 0); 
+            ctx.restore();
+
+            // 壁に当たったら反射
+            if (kamaboko.x + 30 > canvas.width || kamaboko.x < 0) {
+                kamaboko.dx = -kamaboko.dx;
+                kamaboko.angleIncrement = -kamaboko.angleIncrement;
+            }
+            if (kamaboko.y + 50 > canvas.height || kamaboko.y < 0) {
+                kamaboko.dy = -kamaboko.dy;
+                kamaboko.angleIncrement = -kamaboko.angleIncrement;
+            }
+
+            
+            kamaboko.x += kamaboko.dx;
+            kamaboko.y += kamaboko.dy;
+            kamaboko.angle += kamaboko.angleIncrement;
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            kamabokoList.forEach(drawKamaboko);
+
+            requestAnimationFrame(animate);
+        }
+
+        // 1秒おきに新しいかまぼこを作成
+        setInterval(createKamaboko, 1000);
+
+        animate();
+    </script>
+    <hr>
+    <iframe src="https://kama5.f5.si/sitarahen.html" frameborder="0" class="sita"></iframe>
+</body>
+</html>
