@@ -3,5 +3,8 @@
 kama5.linkから入れます
 
 
-
-(-ω-)
+```html
+<body>
+  <syobon>(-ω-)</syobon>
+</body>
+```
