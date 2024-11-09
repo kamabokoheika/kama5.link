@@ -90,7 +90,7 @@
         // フーリエ変換を行う分割数。2の乗数でなくてはならない
         nodeAnalyser.fftSize = FFT_SIZE;
         // 0～1の範囲でデータの動きの速さ 0だともっとも速く、1に近づくほど遅くなる
-        nodeAnalyser.smoothingTimeConstant = 0.85;
+        nodeAnalyser.smoothingTimeConstant = 0.3;
         // オーディオの出力先を設定
         nodeAnalyser.connect(context.destination);
 
